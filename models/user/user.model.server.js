@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
-var userModel = mongoose.model('UserModel', userSchema);
+var userModel = mongoose.model('UserModel', userSchema); // Like repository
 
 function findUserByCredentials(credentials) {
     return userModel.findOne(credentials, {username: 1});
