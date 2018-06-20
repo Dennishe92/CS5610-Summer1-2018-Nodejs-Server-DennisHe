@@ -1,6 +1,7 @@
 module.exports = function (app) {
     app.get('/api/user', findAllUsers);
     app.get('/api/user/:userId', findUserById);
+    app.get('/api/user/username', findUserByUsername)
     app.post('/api/user', createUser);
     app.get('/api/profile', profile);
     app.post('/api/logout', logout);
@@ -9,9 +10,11 @@ module.exports = function (app) {
     var userModel = require('../models/user/user.model.server');
 
     function login(req, res) {
-        var credentials = req.body;
+        // var credentials = req.body;
+        var username = req.query["username"];
+        var password = req.query["password"];
         userModel
-            .findUserByCredentials(credentials)
+            .findUserByCredentials(username, password)
             .then(function(user) {
                 req.session['currentUser'] = user;
                 res.json(user);
@@ -21,6 +24,15 @@ module.exports = function (app) {
     function logout(req, res) {
         req.session.destroy();
         res.send(200);
+    }
+
+    function findUserByUsername(req, res) {
+        var username = req.query["username"];
+        userModel
+            .findUserByCredentials(username)
+            .then(function(user) {
+            res.json(user);
+        })
     }
 
     function findUserById(req, res) {

@@ -1,7 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/course-manager');
+mongoose.connect(process.env.MONGODATA);
 
 
 var app = express()
@@ -68,4 +68,4 @@ userService(app);
 
 require('./services/section.service.server')(app);
 
-app.listen(4000);
+app.listen(process.env.PORT || 4000);
