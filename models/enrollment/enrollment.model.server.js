@@ -28,5 +28,6 @@ function findEnrollmentsForStudent(studentId) {
 module.exports = {
     enrollStudentInSection: enrollStudentInSection,
     findSectionsForStudent: findSectionsForStudent,
-    unenrollStudentInSection: unenrollStudentInSection
+    unenrollStudentInSection: unenrollStudentInSection,
+    findEnrollmentsForStudent: findEnrollmentsForStudent
 };
