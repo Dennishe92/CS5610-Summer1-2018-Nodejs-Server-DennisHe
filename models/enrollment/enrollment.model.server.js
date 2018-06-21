@@ -13,7 +13,20 @@ function findSectionsForStudent(studentId) {
         .exec();
 }
 
+function unenrollStudentInSection(enrollment) {
+    return enrollmentModel.remove(enrollment);
+}
+
+function findEnrollmentsForStudent(studentId) {
+    return enrollmentModel.find({student: studentId})
+        .populate('section')
+        .exec();
+}
+
+
+
 module.exports = {
     enrollStudentInSection: enrollStudentInSection,
-    findSectionsForStudent: findSectionsForStudent
+    findSectionsForStudent: findSectionsForStudent,
+    unenrollStudentInSection: unenrollStudentInSection
 };

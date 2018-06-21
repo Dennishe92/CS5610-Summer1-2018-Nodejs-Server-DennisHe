@@ -2,27 +2,20 @@ var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('UserModel', userSchema); // Like repository
 
-// function findUserByCredentials(credentials) {
-//     return userModel.findOne(credentials, {username: 1});
-// }
-function findUserByCredentials(username, password) {
-    return userModel.findOne({username: username, password: password});
+function findUserByCredentials(credentials) {
+    return userModel.findOne(credentials, {username: 1});
 }
-
 
 function deleteUser (userId) {
     return userModel.remove({_id: userId});
 }
 
-function updateUser(userId, user) {
-    var userId = userId;
-    var user = user;
-    return userModel.update({_id: userId},{
-        $set: {
-            username: user.username,
-            firstName : user.firstName,
-            lastName : user.lastName,
-            email: user.email}});
+function updateUser(user) {
+    return userModel.update({username:user.username},
+        {firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+        })
 }
 
 function findUserByUsername(username) {
